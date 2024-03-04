@@ -1,0 +1,228 @@
+Program.Sub.ScreenSU.Start
+
+Gui.Form1..Create
+Gui.Form1..Caption("Serial Number View")
+Gui.Form1..Size(6600,7215)
+Gui.Form1..Position(0,0)
+Gui.Form1..AlwaysOnTop(False)
+Gui.Form1..FontName("Arial")
+Gui.Form1..FontSize(7)
+Gui.Form1..ForeColor(0)
+Gui.Form1..Backcolor(-2147483633)
+Gui.Form1..ControlBox(True)
+Gui.Form1..MaxButton(False)
+Gui.Form1..MinButton(False)
+Gui.Form1..MousePointer(1)
+Gui.Form1..Moveable(True)
+Gui.Form1..Sizeable(False)
+Gui.Form1..ShowInTaskBar(False)
+Gui.Form1..TitleBar(True)
+
+Gui.Form1..Event(unload,Form1_Unload)
+
+Gui.Form1.lblPart.Create(label)
+Gui.Form1.lblPart.Caption("FG Part")
+Gui.Form1.lblPart.Visible(True)
+Gui.Form1.lblPart.Size(1500,300)
+Gui.Form1.lblPart.Zorder(0)
+Gui.Form1.lblPart.Position(195,195)
+Gui.Form1.lblPart.Enabled(True)
+Gui.Form1.lblPart.Alignment(0)
+Gui.Form1.lblPart.FontName("Arial")
+Gui.Form1.lblPart.FontSize(7)
+Gui.Form1.lblPart.Backcolor(-2147483633)
+Gui.Form1.lblPart.BackStyle(0)
+Gui.Form1.lblPart.Tooltip("")
+Gui.Form1.lblPart.ControlGroup(0)
+
+
+Gui.Form1.txtPart.Create(textbox)
+Gui.Form1.txtPart.Text("")
+Gui.Form1.txtPart.Visible(True)
+Gui.Form1.txtPart.Size(2445,300)
+Gui.Form1.txtPart.Zorder(0)
+Gui.Form1.txtPart.Position(195,480)
+Gui.Form1.txtPart.Enabled(False)
+Gui.Form1.txtPart.Alignment(0)
+Gui.Form1.txtPart.FontName("Arial")
+Gui.Form1.txtPart.FontSize(7)
+Gui.Form1.txtPart.Backcolor(16777215)
+Gui.Form1.txtPart.BorderStyle(1)
+Gui.Form1.txtPart.TabStop(True)
+Gui.Form1.txtPart.TabIndex(10)
+Gui.Form1.txtPart.Tooltip("")
+Gui.Form1.txtPart.ControlGroup(0)
+Gui.Form1.txtPart.DefaultValue("")
+
+
+Gui.Form1.lblSerial.Create(label)
+Gui.Form1.lblSerial.Caption("FG Serial #")
+Gui.Form1.lblSerial.Visible(True)
+Gui.Form1.lblSerial.Size(1500,300)
+Gui.Form1.lblSerial.Zorder(0)
+Gui.Form1.lblSerial.Position(2865,195)
+Gui.Form1.lblSerial.Enabled(True)
+Gui.Form1.lblSerial.Alignment(0)
+Gui.Form1.lblSerial.FontName("Arial")
+Gui.Form1.lblSerial.FontSize(7)
+Gui.Form1.lblSerial.Backcolor(-2147483633)
+Gui.Form1.lblSerial.BackStyle(0)
+Gui.Form1.lblSerial.Tooltip("")
+Gui.Form1.lblSerial.ControlGroup(0)
+
+
+Gui.Form1.txtSerial.Create(textbox)
+Gui.Form1.txtSerial.Text("")
+Gui.Form1.txtSerial.Visible(True)
+Gui.Form1.txtSerial.Size(3435,300)
+Gui.Form1.txtSerial.Zorder(0)
+Gui.Form1.txtSerial.Position(2865,480)
+Gui.Form1.txtSerial.Enabled(False)
+Gui.Form1.txtSerial.Alignment(0)
+Gui.Form1.txtSerial.FontName("Arial")
+Gui.Form1.txtSerial.FontSize(7)
+Gui.Form1.txtSerial.Backcolor(16777215)
+Gui.Form1.txtSerial.BorderStyle(1)
+Gui.Form1.txtSerial.TabStop(True)
+Gui.Form1.txtSerial.TabIndex(21)
+Gui.Form1.txtSerial.Tooltip("")
+Gui.Form1.txtSerial.ControlGroup(0)
+Gui.Form1.txtSerial.DefaultValue("")
+
+
+Gui.Form1.gsfgSerial.Create(gsflexgrid)
+Gui.Form1.gsfgSerial.Visible(True)
+Gui.Form1.gsfgSerial.Size(6120,5130)
+Gui.Form1.gsfgSerial.Zorder(0)
+Gui.Form1.gsfgSerial.Position(195,1035)
+Gui.Form1.gsfgSerial.Enabled(True)
+Gui.Form1.gsfgSerial.FixedRows(0)
+Gui.Form1.gsfgSerial.FixedCols(0)
+
+
+Gui.Form1.cmdDone.Create(button)
+Gui.Form1.cmdDone.Caption("Done")
+Gui.Form1.cmdDone.Visible(True)
+Gui.Form1.cmdDone.Size(1125,345)
+Gui.Form1.cmdDone.Zorder(0)
+Gui.Form1.cmdDone.Position(200,6345)
+Gui.Form1.cmdDone.Enabled(True)
+Gui.Form1.cmdDone.FontName("Arial")
+Gui.Form1.cmdDone.FontSize(7)
+Gui.Form1.cmdDone.TabStop(True)
+Gui.Form1.cmdDone.TabIndex(32)
+Gui.Form1.cmdDone.Tooltip("")
+Gui.Form1.cmdDone.ControlGroup(0)
+Gui.Form1.cmdDone.DefaultValue("")
+
+Gui.Form1.cmdDone.Event(click,Form1_Unload)
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Variable.UDT.uSerial.Define("sPart",String,Part)
+Variable.UDT.uSerial.Define("sSerial",String,Serial)
+Variable.uGlobal.uSerial.Declare("uSerial")
+
+Program.Sub.Preflight.End
+
+
+Program.Sub.Main.Start
+'Created For Virnig by SKC on 11/23/15
+'This will run from the Script 1 button on the Item History Screen
+'It will take the Serial number searched for and get the Subcomponents that were issued to the FG Part and display on a Custom Screen.
+
+
+v.Local.sSerial.Declare(String)
+v.Local.sPart.Declare(String)
+v.Local.sRow.Declare(String)
+
+F.ODBC.Connection!conx.OpenConnection(v.Ambient.PDSN, v.Ambient.PUser, v.Ambient.PPass)
+F.Intrinsic.Control.SelectCase(v.Caller.Hook)
+	f.Intrinsic.Control.Case(26604)
+		v.Passed.000201.Set("Serial View")
+	F.Intrinsic.Control.Case(26611)
+		'Check to see serial Number is selected
+		F.Intrinsic.Control.CallSub(buildstyle)
+		F.Intrinsic.Control.If(v.Passed.000005.Trim, =, "Serial Number")
+			v.Local.sSerial.Set(v.Passed.000004)
+			F.Intrinsic.BDF.Load("AUX001", "AUX001")
+			F.Intrinsic.BDF.ReadRow("AUX001", 0, v.Local.sRow)
+			F.Intrinsic.String.Split(v.Local.sRow, "|~|", v.Local.sRow)
+			v.Local.sPart.Set(v.Local.sRow(3))
+			F.Intrinsic.Control.CallSub(serialnumbers, "sPart", v.Local.sPart, "sSerial", v.Local.sSerial)
+			gui.Form1.txtPart.Text(v.Local.sPart.Trim)
+			Gui.Form1.txtSerial.Text(v.Local.sSerial.Trim)
+			Gui.Form1..Show
+		F.Intrinsic.Control.Else
+			F.Intrinsic.UI.Msgbox("Search by Serial Number!", "Criteria Mismatch")
+			F.Intrinsic.Control.CallSub(form1_unload)
+		F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndSelect
+
+
+Program.Sub.Main.End
+
+Program.Sub.Form1_Unload.Start
+F.Intrinsic.Control.End
+
+Program.Sub.Form1_Unload.End
+
+Program.Sub.SerialNumbers.Start
+v.Local.sSql.Declare(String)
+
+'custom Table that holds the FG serial Number linked to the Subcomponent Part Serial numbers.
+F.Intrinsic.String.Build("Select Part, Serial from GCG_VIR_Comp_Serial where FG_Part = '{0}' and FG_Serial = '{1}'", v.Args.sPart, v.Args.sSerial, v.Local.sSql)
+F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst", v.Local.sSql)
+F.Intrinsic.Control.If(v.ODBC.conx!rst.EOF, =, False)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("conx", "rst", "v.uGlobal.uSerial", False)
+	Gui.Form1.gsfgSerial.LoadFromUDT("v.uGlobal.uSerial","sPart::0*!*sSerial::1", 2)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("No Serial Parts Found!", "Serial Parts")
+F.Intrinsic.Control.EndIf
+
+Program.Sub.SerialNumbers.End
+
+Program.Sub.BuildStyle.Start
+Gui.Form1.gsfgSerial.Cols(2)
+Gui.Form1.gsfgSerial.Rows(2)
+
+Gui.Form1.gsfgSerial.FixedRows(1)
+
+Gui.Form1.gsfgSerial.SetColumnPercentages(".40:.60")
+
+'Column 0
+'Style 1
+Gui.Form1.gsfgSerial.BuildStyle(1,0, "Type", "Locked", True)
+Gui.Form1.gsfgSerial.BuildStyle(1,0, "Format", "Alignment", 4)
+
+'Column 0
+'Style 2
+Gui.Form1.gsfgSerial.BuildStyle(2, 0, "Type", "Locked", True)
+Gui.Form1.gsfgSerial.BuildStyle(2, 0, "Format", "Alignment", 2)
+
+'Column 1
+'Style 1
+Gui.Form1.gsfgSerial.BuildStyle(1, 1, "Type", "Locked", True)
+Gui.Form1.gsfgSerial.BuildStyle(1, 1, "Format", "Alignment", 4)
+
+'Column 1
+'Style 2
+Gui.Form1.gsfgSerial.BuildStyle(2, 1, "Type", "Locked", True)
+Gui.Form1.gsfgSerial.BuildStyle(2, 1, "Format", "Alignment", 6)
+
+Gui.Form1.gsfgSerial.TextMatrix(0, 0, "Part")
+Gui.Form1.gsfgSerial.TextMatrix(1, 0, "Serial Number")
+
+gui.Form1.gsfgSerial.ApplyStyle(0, 1)
+Gui.Form1.gsfgSerial.ApplyStyle(1, 2)
+
+Program.Sub.BuildStyle.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_VIR_7222_SerialView$}$SKT$}$11/23/2015 8:04:46 AM$}$False
+${$1$}$$}$$}$1$}$26611$}$Script 1 button$}$11/23/2015 10:33:30 AM$}$Used to show the relationship between the FG Serial and Subcomponent Serial
+${$1$}$$}$$}$0$}$26640$}$Populate Hook Item History$}$11/23/2015 10:32:06 AM$}$Used to change the Script 1 button text to Serial View
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This will be a Custom GAB Script that will display the component parts and serial numbers that are associated with a finished good part serial number. This view will be accessed through the Script 1 button on the Item History Screen. The user will need to select a FG Serial number that will then populate the grid on the Item History screen. After this selection has been made the script 1 button can be used to display the component part Serial numbers.  The custom Table that was installed for the First part of this project will need to be avaliable in order for the SubComponent Serial numbers to be found.  (GCG_VIR_Comp_Serial)
+
+Program.Sub.Comments.End
